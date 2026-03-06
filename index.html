@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VSL Boys – FAQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0d0d0f;
+      --surface:     #141418;
+      --surface2:    #1c1c22;
+      --border:      rgba(255,255,255,0.07);
+      --accent:      #7c3aed;
+      --accent2:     #a78bfa;
+      --accent3:     #c4b5fd;
+      --text:        #f0f0f5;
+      --muted:       #8b8b9e;
+      --glow:        rgba(124,58,237,0.35);
+      --radius:      14px;
+      --transition:  0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ──────────────────────────────────── */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bg-orb-1 {
+      width: 640px; height: 640px;
+      background: radial-gradient(circle, rgba(124,58,237,0.22) 0%, transparent 70%);
+      top: -200px; left: -100px;
+    }
+    .bg-orb-2 {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+      bottom: -100px; right: -80px;
+    }
+
+    /* ── LAYOUT ──────────────────────────────────────── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── HEADER / HERO ───────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 96px 20px 64px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.35);
+      color: var(--accent3);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    .badge span { font-size: 16px; }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-title .gradient {
+      background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 40%, #6366f1 80%, #a78bfa 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 0%   50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0%   50%; }
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .stat-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .stat-pill strong { color: var(--text); margin-right: 4px; }
+
+    /* ── SEARCH ──────────────────────────────────────── */
+    .search-wrap {
+      position: relative;
+      margin: 0 auto 48px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      padding: 14px 16px 14px 44px;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    #search::placeholder { color: var(--muted); }
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    /* ── CATEGORIES ──────────────────────────────────── */
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .tab {
+      cursor: pointer;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      padding: 7px 16px;
+      border-radius: 999px;
+      transition: all var(--transition);
+    }
+    .tab:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+    .tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── FAQ SECTION ─────────────────────────────────── */
+    .faq-section { margin-bottom: 48px; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── ACCORDION ITEM ──────────────────────────────── */
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .faq-item:hover { border-color: rgba(124,58,237,0.35); }
+    .faq-item.open {
+      border-color: rgba(124,58,237,0.5);
+      box-shadow: 0 0 0 1px rgba(124,58,237,0.15) inset, 0 4px 24px rgba(124,58,237,0.1);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      padding: 18px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: color var(--transition);
+    }
+    .faq-question:hover { color: var(--accent3); }
+    .faq-item.open .faq-question { color: var(--accent3); }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .faq-icon svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .faq-answer-inner {
+      padding: 0 20px 18px;
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+    }
+    .faq-answer-inner a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+    .faq-answer-inner a:hover { text-decoration: underline; }
+
+    /* ── NO RESULTS ──────────────────────────────────── */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+    .no-results .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 20px 56px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+    footer strong { color: var(--accent2); }
+
+    /* ── SCROLL-TO-TOP ───────────────────────────────── */
+    #scrollTop {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.45);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity var(--transition), transform var(--transition);
+      pointer-events: none;
+    }
+    #scrollTop.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    #scrollTop svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── FADE-IN ANIMATION ───────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeIn 0.55s ease forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .faq-section:nth-child(1) { animation-delay: 0.05s; }
+    .faq-section:nth-child(2) { animation-delay: 0.1s;  }
+    .faq-section:nth-child(3) { animation-delay: 0.15s; }
+    .faq-section:nth-child(4) { animation-delay: 0.2s;  }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 520px) {
+      header { padding: 72px 20px 48px; }
+      .hero-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background decorations -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+  <!-- Hero -->
+  <header>
+    <div class="badge"><span>🏀</span> VSL Boys</div>
+    <h1 class="hero-title">
+      Everything you need to know about<br />
+      <span class="gradient">the VSL Boys</span>
+    </h1>
+    <p class="hero-sub">
+      Your go-to source for all the questions, facts, and lore about the one and only VSL crew.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-pill"><strong>18</strong> FAQs answered</div>
+      <div class="stat-pill"><strong>5</strong> categories</div>
+      <div class="stat-pill"><strong>1</strong> legendary crew</div>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container">
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input id="search" type="search" placeholder="Search FAQs…" aria-label="Search FAQs" />
+    </div>
+
+    <!-- Category tabs -->
+    <div class="category-tabs" role="tablist" aria-label="FAQ categories">
+      <button class="tab active" data-cat="all" role="tab" aria-selected="true">All</button>
+      <button class="tab" data-cat="general" role="tab" aria-selected="false">General</button>
+      <button class="tab" data-cat="activities" role="tab" aria-selected="false">Activities</button>
+      <button class="tab" data-cat="inside-jokes" role="tab" aria-selected="false">Inside Jokes</button>
+      <button class="tab" data-cat="lore" role="tab" aria-selected="false">Lore</button>
+      <button class="tab" data-cat="membership" role="tab" aria-selected="false">Membership</button>
+    </div>
+
+    <!-- No results message -->
+    <div class="no-results" id="noResults" aria-live="polite">
+      <div class="emoji">🔍</div>
+      <p>No FAQs found for "<strong id="noResultsQuery"></strong>".</p>
+    </div>
+
+    <!-- ── GENERAL ───────────────────────────────────── -->
+    <section class="faq-section fade-in" data-category="general">
+      <div class="section-label">General</div>
+      <div class="faq-list">
+
+        <div class="faq-item" data-category="general">
+          <button class="faq-question" aria-expanded="false">
+            Who exactly are the VSL Boys?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              The VSL Boys are a legendary group of friends united by good vibes, unforgettable memories, and an unbreakable bond. The "VSL" stands as the banner under which the crew rallied — a symbol of brotherhood, banter, and belonging.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="general">
+          <button class="faq-question" aria-expanded="false">
+            What does "VSL" stand for?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              That's classified information — and frankly, only a true VSL Boy would know. What we <em>can</em> say is that those three letters carry weight, history, and a whole lot of lore.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="general">
+          <button class="faq-question" aria-expanded="false">
+            How long have the VSL Boys been a crew?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Long enough to have a dedicated FAQ page, and that says everything. The crew has been accumulating stories, inside jokes, and questionable decisions for years — and counting.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="general">
+          <button class="faq-question" aria-expanded="false">
+            How many VSL Boys are there?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              The core roster is tight-knit and quality over quantity is the philosophy. Every single member is essential to the group's ecosystem — remove one and the whole dynamic shifts.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── ACTIVITIES ────────────────────────────────── -->
+    <section class="faq-section fade-in" data-category="activities">
+      <div class="section-label">Activities</div>
+      <div class="faq-list">
+
+        <div class="faq-item" data-category="activities">
+          <button class="faq-question" aria-expanded="false">
+            What activities do the VSL Boys enjoy most?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              The VSL Boys are men of many talents: hoops, late-night food runs, highly competitive FIFA sessions, and marathon group chat debates that somehow end with everyone agreeing.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="activities">
+          <button class="faq-question" aria-expanded="false">
+            Do the VSL Boys have a signature sport or game?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Basketball holds a special place in the crew's heart — the court is where legends are made and trash talk reaches its peak form. No fouls called, obviously.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="activities">
+          <button class="faq-question" aria-expanded="false">
+            What is a typical VSL Boys hangout like?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Pure organized chaos. Someone suggests a plan, four different counter-plans emerge, and the group eventually does something entirely different — and it always ends up being the best time. Classic VSL energy.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── INSIDE JOKES ───────────────────────────────── -->
+    <section class="faq-section fade-in" data-category="inside-jokes">
+      <div class="section-label">Inside Jokes</div>
+      <div class="faq-list">
+
+        <div class="faq-item" data-category="inside-jokes">
+          <button class="faq-question" aria-expanded="false">
+            Can you explain any of the inside jokes?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              If you have to ask, you already know the answer: no. Inside jokes live and die by context, and the VSL Boys' archive of "you had to be there" moments is vast. Membership has its privileges.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="inside-jokes">
+          <button class="faq-question" aria-expanded="false">
+            Is there a phrase that defines the VSL Boys?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              There are many, but they must be uttered in context to carry their full power. What we can say is that the VSL Boys have a rich vocabulary of phrases that would mean absolutely nothing to an outsider.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="inside-jokes">
+          <button class="faq-question" aria-expanded="false">
+            How does one learn the VSL Boys lingo?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Immersion is the only way. Spend enough time with the crew and the phrases will absorb into your vocabulary naturally — like osmosis, but funnier.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── LORE ───────────────────────────────────────── -->
+    <section class="faq-section fade-in" data-category="lore">
+      <div class="section-label">Lore</div>
+      <div class="faq-list">
+
+        <div class="faq-item" data-category="lore">
+          <button class="faq-question" aria-expanded="false">
+            What is the most legendary VSL Boys story?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              There are too many to count. Every member has at least one tale that begins "so we were just supposed to…" and ends three hours later than planned with a story worth retelling forever. The lore is deep.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="lore">
+          <button class="faq-question" aria-expanded="false">
+            Has the VSL crew ever had a legendary rivalry?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Within the group? Absolutely — the friendly competition is relentless and drives everyone to their best. Against outsiders? The VSL Boys prefer to let their collective excellence speak for itself.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="lore">
+          <button class="faq-question" aria-expanded="false">
+            Is there a VSL Boys origin story?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Like all great origin stories, it starts in an unlikely place, involves a bit of luck, and results in something far greater than anyone expected. The founding members know exactly how it went down.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="lore">
+          <button class="faq-question" aria-expanded="false">
+            What is the VSL Boys' biggest collective achievement?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Staying together, staying real, and never letting life get in the way of the bond. That and having a proper FAQ page on the internet — which, honestly, is peak legacy material.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MEMBERSHIP ─────────────────────────────────── -->
+    <section class="faq-section fade-in" data-category="membership">
+      <div class="section-label">Membership</div>
+      <div class="faq-list">
+
+        <div class="faq-item" data-category="membership">
+          <button class="faq-question" aria-expanded="false">
+            Can someone join the VSL Boys?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Membership isn't applied for — it's earned through presence, trust, and vibes. There is no application form. You'll know if you're in.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="membership">
+          <button class="faq-question" aria-expanded="false">
+            Are there honorary VSL Boys?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Every so often, someone enters the orbit of the crew and earns honorary status through exceptional coolness. It's a rare honor, not given lightly, and comes with full bragging rights.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="membership">
+          <button class="faq-question" aria-expanded="false">
+            What does it mean to be a VSL Boy?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              It means showing up — for the hangs, for the wins, for the losses, and for every random Tuesday that somehow becomes a core memory. The VSL Boys is a state of mind as much as it is a group.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-category="membership">
+          <button class="faq-question" aria-expanded="false">
+            Once a VSL Boy, always a VSL Boy?
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Without question. The bond doesn't have an expiry date. Distance, time, life changes — none of it matters. Once you're in, you're in for life. That's VSL law.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Made with ❤️ for the <strong>VSL Boys</strong> · Hosted on GitHub Pages</p>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button id="scrollTop" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script>
+    // ── Accordion ──────────────────────────────────────
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item   = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          el.querySelector('.faq-answer').style.maxHeight = '0';
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // ── Category tabs ──────────────────────────────────
+    const tabs     = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.faq-section');
+    const items    = document.querySelectorAll('.faq-item');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        const cat = tab.dataset.cat;
+
+        sections.forEach(sec => {
+          if (cat === 'all' || sec.dataset.category === cat) {
+            sec.style.display = '';
+          } else {
+            sec.style.display = 'none';
+          }
+        });
+
+        // Re-sync search
+        filterFaqs();
+      });
+    });
+
+    // ── Search ─────────────────────────────────────────
+    const searchInput    = document.getElementById('search');
+    const noResults      = document.getElementById('noResults');
+    const noResultsQuery = document.getElementById('noResultsQuery');
+
+    function filterFaqs() {
+      const q   = searchInput.value.trim().toLowerCase();
+      const cat = document.querySelector('.tab.active').dataset.cat;
+      let   visible = 0;
+
+      sections.forEach(sec => {
+        // respect active category
+        const secCat = sec.dataset.category;
+        if (cat !== 'all' && secCat !== cat) { sec.style.display = 'none'; return; }
+
+        let secVisible = 0;
+        sec.querySelectorAll('.faq-item').forEach(item => {
+          const text = item.textContent.toLowerCase();
+          const show = !q || text.includes(q);
+          item.style.display = show ? '' : 'none';
+          if (show) { secVisible++; visible++; }
+        });
+
+        sec.style.display = secVisible === 0 ? 'none' : '';
+      });
+
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+      noResultsQuery.textContent = searchInput.value.trim();
+    }
+
+    searchInput.addEventListener('input', filterFaqs);
+
+    // ── Scroll to top ──────────────────────────────────
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
