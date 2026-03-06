@@ -356,10 +356,62 @@
     .faq-section:nth-child(3) { animation-delay: 0.15s; }
     .faq-section:nth-child(4) { animation-delay: 0.2s;  }
 
+    /* ── CREW SECTION ────────────────────────────────── */
+    .crew-section {
+      margin-bottom: 64px;
+    }
+
+    .crew-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 16px;
+    }
+
+    .crew-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      cursor: default;
+    }
+    .crew-card:hover {
+      border-color: rgba(124,58,237,0.45);
+      box-shadow: 0 0 0 1px rgba(124,58,237,0.15) inset, 0 8px 28px rgba(124,58,237,0.12);
+      transform: translateY(-3px);
+    }
+
+    .crew-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(124,58,237,0.35);
+      background: var(--surface2);
+    }
+
+    .crew-nickname {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent3);
+    }
+
+    .crew-fullname {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
     /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 520px) {
       header { padding: 72px 20px 48px; }
       .hero-title { font-size: 2.2rem; }
+      .crew-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
     }
   </style>
 </head>
@@ -383,12 +435,56 @@
     <div class="hero-stats">
       <div class="stat-pill"><strong>10</strong> FAQs answered</div>
       <div class="stat-pill"><strong>4</strong> categories</div>
-      <div class="stat-pill"><strong>1</strong> legendary crew</div>
+      <div class="stat-pill"><strong>6</strong> crew members</div>
     </div>
   </header>
 
   <!-- Main content -->
   <main class="container">
+
+    <!-- ── THE CREW ──────────────────────────────────── -->
+    <section class="crew-section fade-in">
+      <div class="section-label">The Crew</div>
+      <div class="crew-grid">
+
+        <div class="crew-card">
+          <img class="crew-avatar" src="images/gab.png" alt="Gabriel Derhy" />
+          <div class="crew-nickname">Gab</div>
+          <div class="crew-fullname">Gabriel Derhy</div>
+        </div>
+
+        <div class="crew-card">
+          <img class="crew-avatar" src="images/panda.png" alt="Ethan Toledano" />
+          <div class="crew-nickname">Panda</div>
+          <div class="crew-fullname">Ethan Toledano</div>
+        </div>
+
+        <div class="crew-card">
+          <img class="crew-avatar" src="images/jer.png" alt="Jordan Serour" />
+          <div class="crew-nickname">Jer</div>
+          <div class="crew-fullname">Jordan Serour</div>
+        </div>
+
+        <div class="crew-card">
+          <img class="crew-avatar" src="images/yoni.png" alt="Jonathan Todoros" />
+          <div class="crew-nickname">Yoni</div>
+          <div class="crew-fullname">Jonathan Todoros</div>
+        </div>
+
+        <div class="crew-card">
+          <img class="crew-avatar" src="images/daniel.png" alt="Daniel Mamane" />
+          <div class="crew-nickname">Daniel</div>
+          <div class="crew-fullname">Daniel Mamane</div>
+        </div>
+
+        <div class="crew-card">
+          <img class="crew-avatar" src="images/assayag.png" alt="Eitan Assayag" />
+          <div class="crew-nickname">Assayag</div>
+          <div class="crew-fullname">Eitan Assayag</div>
+        </div>
+
+      </div>
+    </section>
 
     <!-- Search -->
     <div class="search-wrap">
